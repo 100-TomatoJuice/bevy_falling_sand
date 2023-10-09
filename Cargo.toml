@@ -1,0 +1,23 @@
+[package]
+name = "bevy_falling_sand"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy = { version = "0.11.3", default-features = false, features = [
+    "bevy_core_pipeline",
+    "bevy_render",
+    "bevy_text",
+    "bevy_ui",
+    "bevy_winit",
+    "multi-threaded",
+    "x11",
+    "dynamic_linking",
+] }
+bevy_rapier2d = "0.22.0"
+rand = "0.8.5"
+
+[profile.dev.package."*"]
+opt-level = 3
