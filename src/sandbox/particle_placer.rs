@@ -49,10 +49,17 @@ pub fn place_particles(
             return;
         }
 
-        if mouse_button_input.pressed(MouseButton::Left) && sandbox.get(x, y).is_none() {
-            sandbox.set(x, y, Some(get_particle(selected.particle_type)));
-        } else if mouse_button_input.pressed(MouseButton::Right) && sandbox.get(x, y).is_some() {
-            sandbox.set(x, y, None);
+        for x_offset in -5..5{
+            for y_offset in -5..5{
+                let x = x.saturating_add_signed(x_offset);
+                let y = y.saturating_add_signed(y_offset);
+
+                if mouse_button_input.pressed(MouseButton::Left) && sandbox.get(x, y).is_none() {
+                    sandbox.set(x, y, Some(get_particle(selected.particle_type)));
+                } else if mouse_button_input.pressed(MouseButton::Right) && sandbox.get(x, y).is_some() {
+                    sandbox.set(x, y, None);
+                }
+            }
         }
     }
 }
