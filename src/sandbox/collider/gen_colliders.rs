@@ -79,6 +79,7 @@ pub fn generate_sandbox_colliders(
     }
 }
 
+// Based on https://github.com/shnewto/bevy_rapier_collider_gen/blob/main/src/edge.rs#L56
 pub fn march_edges(
     sandbox: &Sandbox,
     low: Vec2,

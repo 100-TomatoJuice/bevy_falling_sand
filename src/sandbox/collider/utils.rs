@@ -34,6 +34,8 @@ pub fn ramer_douglas_peucker(data: &[Vec2], epsilon: f32) -> Vec<Vec2> {
     results
 }
 
+// CC0 Tim Sheerman-Chase, 2016
+// https://gist.github.com/TimSC/0813573d77734bcb6f2cd2cf6cc7aa51
 pub fn perpendicular_distance(point: Vec2, line_start: Vec2, line_end: Vec2) -> f32 {
     let mut dx = line_end.x - line_start.x;
     let mut dy = line_end.y - line_start.y;

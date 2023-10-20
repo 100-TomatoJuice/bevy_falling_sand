@@ -1,3 +1,5 @@
+//! The method for generating colliders is based on [Nolla Games' GDC talk on Noita](https://www.youtube.com/watch?v=prXuyMCgbTc)
+
 use bevy::prelude::*;
 
 use self::gen_colliders::generate_sandbox_colliders;
