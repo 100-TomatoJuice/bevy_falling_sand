@@ -4,6 +4,8 @@ use super::sandbox::Sandbox;
 
 const BACKGROUND_COLOR: (u8, u8, u8, u8) = (0, 0, 0, 0);
 
+// © 2021 Bas van Schoonhoven
+// Based on https://github.com/grunnt/falling-rust/blob/master/src/render.rs
 pub fn render_particles(
     mut images: ResMut<Assets<Image>>,
     mut sandbox: Query<(&mut Sandbox, &Handle<Image>)>,
