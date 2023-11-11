@@ -53,7 +53,7 @@ pub fn spawn_sandbox(commands: &mut Commands, images: &mut Assets<Image>, width:
             &[0, 0, 0, 0],
             TextureFormat::Rgba8UnormSrgb,
         );
-        image.sampler_descriptor = ImageSampler::nearest();
+        image.sampler = ImageSampler::nearest();
         images.add(image)
     };
     commands
