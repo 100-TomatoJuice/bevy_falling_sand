@@ -4,6 +4,8 @@ use bevy::prelude::*;
 
 use self::gen_colliders::generate_sandbox_colliders;
 
+use super::{SANDBOX_X_CHUNKS, SANDBOX_Y_CHUNKS};
+
 pub mod gen_colliders;
 mod utils;
 
@@ -24,7 +26,7 @@ pub struct ColliderStorage {
 impl Default for ColliderStorage {
     fn default() -> Self {
         Self {
-            colliders: vec![None; 17 * 30],
+            colliders: vec![None; SANDBOX_X_CHUNKS * SANDBOX_Y_CHUNKS],
         }
     }
 }

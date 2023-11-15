@@ -16,14 +16,14 @@ pub struct SandboxChunk {
 }
 
 impl SandboxChunk {
-    pub fn new(width: usize, height: usize, index: usize) -> Self {
+    pub fn new(width: usize, height: usize, index: usize, x_chunks: usize) -> Self {
         Self {
             width,
             height,
             particles: vec![None; width * height],
             local_position: {
-                let local_x = index % 30;
-                let local_y = index / 30;
+                let local_x = index % x_chunks;
+                let local_y = index / x_chunks;
 
                 (local_x, local_y)
             },

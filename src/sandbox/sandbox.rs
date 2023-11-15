@@ -25,7 +25,7 @@ impl Sandbox {
             chunks: {
                 let mut chunks = Vec::with_capacity(x_chunks * y_chunks);
                 for i in 0..chunks.capacity() {
-                    chunks.push(SandboxChunk::new(chunk_width, chunk_height, i));
+                    chunks.push(SandboxChunk::new(chunk_width, chunk_height, i, x_chunks));
                 }
                 chunks
             },

@@ -21,6 +21,11 @@ mod render;
 pub mod sandbox;
 mod simulation;
 
+const SANDBOX_CHUNK_WIDTH: usize = 8;
+const SANDBOX_CHUNK_HEIGHT: usize = 8;
+const SANDBOX_X_CHUNKS: usize = 30;
+const SANDBOX_Y_CHUNKS: usize = 17;
+
 pub struct SandboxPlugin;
 
 impl Plugin for SandboxPlugin {
@@ -38,15 +43,15 @@ impl Plugin for SandboxPlugin {
 }
 
 fn setup(mut commands: Commands, mut images: ResMut<Assets<Image>>) {
-    spawn_sandbox(&mut commands, &mut images, 240, 136);
+    spawn_sandbox(&mut commands, &mut images, SANDBOX_X_CHUNKS, SANDBOX_Y_CHUNKS);
 }
 
-pub fn spawn_sandbox(commands: &mut Commands, images: &mut Assets<Image>, width: u32, height: u32) {
+pub fn spawn_sandbox(commands: &mut Commands, images: &mut Assets<Image>, x_chunks: usize, y_chunks: usize) {
     let image_handle = {
         let mut image = Image::new_fill(
             Extent3d {
-                width,
-                height,
+                width: (x_chunks * SANDBOX_CHUNK_WIDTH) as u32,
+                height: (y_chunks * SANDBOX_CHUNK_HEIGHT) as u32,
                 depth_or_array_layers: 1,
             },
             TextureDimension::D2,
@@ -56,8 +61,9 @@ pub fn spawn_sandbox(commands: &mut Commands, images: &mut Assets<Image>, width:
         image.sampler = ImageSampler::nearest();
         images.add(image)
     };
+
     commands
-        .spawn(Sandbox::new(30, 17, 8, 8))
+        .spawn(Sandbox::new(x_chunks, y_chunks, SANDBOX_CHUNK_WIDTH, SANDBOX_CHUNK_HEIGHT))
         .insert(SpriteBundle {
             texture: image_handle,
             transform: Transform {
