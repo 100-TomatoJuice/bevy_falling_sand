@@ -1,6 +1,8 @@
 # ⏳ Bevy Falling Sand
 [![MIT/Apache 2.0](https://img.shields.io/badge/license-MIT%2FApache-blue.svg)](https://github.com/100-TomatoJuice/bevy_falling_sand#license)
 
+![falling_sand](https://github.com/100-TomatoJuice/bevy_falling_sand/assets/67799071/b77d049c-5f99-407d-baab-67077cd72b7c) 
+
 A velocity-based falling sand simulation built with Rust and Bevy!
 
 This simluation uses [bevy_rapier](https://crates.io/crates/bevy_rapier2d) to generate colliders that regular rigidbodies can interact with. 
