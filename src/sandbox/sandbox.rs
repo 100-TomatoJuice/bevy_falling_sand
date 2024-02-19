@@ -34,7 +34,9 @@ impl Sandbox {
 
     pub fn get(&self, x: usize, y: usize) -> Option<&Particle> {
         let index = self.to_index(x, y);
-        self.chunks.get(index)?.get(x % self.chunk_width, y % self.chunk_height)
+        self.chunks
+            .get(index)?
+            .get(x % self.chunk_width, y % self.chunk_height)
     }
 
     pub fn checked_get(&self, x: usize, y: usize) -> Option<&Particle> {
@@ -55,7 +57,9 @@ impl Sandbox {
 
     pub fn get_mut(&mut self, x: usize, y: usize) -> Option<&mut Particle> {
         let index = self.to_index(x, y);
-        self.chunks.get_mut(index)?.get_mut(x % self.chunk_width, y % self.chunk_height)
+        self.chunks
+            .get_mut(index)?
+            .get_mut(x % self.chunk_width, y % self.chunk_height)
     }
 
     pub fn checked_get_mut(&mut self, x: usize, y: usize) -> Option<&mut Particle> {
@@ -76,10 +80,10 @@ impl Sandbox {
 
     pub fn set(&mut self, x: usize, y: usize, particle: Option<Particle>) {
         let index = self.to_index(x, y);
-        if index >= self.chunks.len(){
+        if index >= self.chunks.len() {
             return;
         }
-        
+
         self.chunks[index].set(x % self.chunk_width, y % self.chunk_height, particle);
 
         self.strong_tick_neighbors(x, y);

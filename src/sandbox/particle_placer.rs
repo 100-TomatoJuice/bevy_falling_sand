@@ -25,8 +25,8 @@ pub fn place_particles(
     mut sandbox_query: Query<&mut Sandbox>,
     query_window: Query<&Window>,
     query_camera: Query<(&Camera, &GlobalTransform)>,
-    mouse_button_input: Res<Input<MouseButton>>,
-    keyboard_input: Res<Input<KeyCode>>,
+    mouse_button_input: Res<ButtonInput<MouseButton>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     mut selected: ResMut<SelectedParticle>,
 ) {
     let (camera, camera_transform) = query_camera.single();
@@ -66,41 +66,52 @@ pub fn place_particles(
     }
 }
 
-fn set_particle_type(keyboard_input: Res<Input<KeyCode>>) -> Option<ParticleTypes> {
-    if keyboard_input.just_pressed(KeyCode::Key1) {
+fn set_particle_type(keyboard_input: Res<ButtonInput<KeyCode>>) -> Option<ParticleTypes> {
+    if keyboard_input.just_pressed(KeyCode::Digit1) {
         println!("Chose Sand");
         return Some(ParticleTypes::Sand);
-    } else if keyboard_input.just_pressed(KeyCode::Key2) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Digit2) {
         println!("Chose Water");
         return Some(ParticleTypes::Water);
-    } else if keyboard_input.just_pressed(KeyCode::Key3) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Digit3) {
         println!("Chose Stone");
         return Some(ParticleTypes::Stone);
-    } else if keyboard_input.just_pressed(KeyCode::Key4) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Digit4) {
         println!("Chose Acid");
         return Some(ParticleTypes::Acid);
-    } else if keyboard_input.just_pressed(KeyCode::Key5) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Digit5) {
         println!("Chose Wood");
         return Some(ParticleTypes::Wood);
-    } else if keyboard_input.just_pressed(KeyCode::Key6) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Digit6) {
         println!("Chose Spark");
         return Some(ParticleTypes::Spark);
-    } else if keyboard_input.just_pressed(KeyCode::Key7) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Digit7) {
         println!("Chose Lava");
         return Some(ParticleTypes::Lava);
-    } else if keyboard_input.just_pressed(KeyCode::Key8) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Digit8) {
         println!("Chose Oil");
         return Some(ParticleTypes::Oil);
-    } else if keyboard_input.just_pressed(KeyCode::Key9) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Digit9) {
         println!("Chose Gunpowder");
         return Some(ParticleTypes::Gunpowder);
-    } else if keyboard_input.just_pressed(KeyCode::Key0) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Digit0) {
         println!("Chose TNT");
         return Some(ParticleTypes::Tnt);
-    } else if keyboard_input.just_pressed(KeyCode::Minus) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Minus) {
         println!("Chose Dirt");
         return Some(ParticleTypes::Dirt);
-    } else if keyboard_input.just_pressed(KeyCode::Equals) {
+    }
+    if keyboard_input.just_pressed(KeyCode::Equal) {
         println!("Chose Grass");
         return Some(ParticleTypes::Grass);
     }

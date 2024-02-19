@@ -1,6 +1,6 @@
 use bevy::{
     prelude::*,
-    render::{render_resource::*, texture::ImageSampler},
+    render::{render_asset::RenderAssetUsages, render_resource::*, texture::ImageSampler},
     time::common_conditions::on_timer,
 };
 use std::f32::consts::PI;
@@ -43,10 +43,20 @@ impl Plugin for SandboxPlugin {
 }
 
 fn setup(mut commands: Commands, mut images: ResMut<Assets<Image>>) {
-    spawn_sandbox(&mut commands, &mut images, SANDBOX_X_CHUNKS, SANDBOX_Y_CHUNKS);
+    spawn_sandbox(
+        &mut commands,
+        &mut images,
+        SANDBOX_X_CHUNKS,
+        SANDBOX_Y_CHUNKS,
+    );
 }
 
-pub fn spawn_sandbox(commands: &mut Commands, images: &mut Assets<Image>, x_chunks: usize, y_chunks: usize) {
+pub fn spawn_sandbox(
+    commands: &mut Commands,
+    images: &mut Assets<Image>,
+    x_chunks: usize,
+    y_chunks: usize,
+) {
     let image_handle = {
         let mut image = Image::new_fill(
             Extent3d {
@@ -57,13 +67,19 @@ pub fn spawn_sandbox(commands: &mut Commands, images: &mut Assets<Image>, x_chun
             TextureDimension::D2,
             &[0, 0, 0, 0],
             TextureFormat::Rgba8UnormSrgb,
+            RenderAssetUsages::default(),
         );
         image.sampler = ImageSampler::nearest();
         images.add(image)
     };
 
     commands
-        .spawn(Sandbox::new(x_chunks, y_chunks, SANDBOX_CHUNK_WIDTH, SANDBOX_CHUNK_HEIGHT))
+        .spawn(Sandbox::new(
+            x_chunks,
+            y_chunks,
+            SANDBOX_CHUNK_WIDTH,
+            SANDBOX_CHUNK_HEIGHT,
+        ))
         .insert(SpriteBundle {
             texture: image_handle,
             transform: Transform {
