@@ -5,8 +5,8 @@
 
 A velocity-based falling sand simulation built with Rust and Bevy!
 
-This simluation uses [bevy_rapier](https://crates.io/crates/bevy_rapier2d) to generate colliders that regular rigidbodies can interact with. 
-This allows for a player to affect the simulation and, since each particle type can have its seperate collider, particle-based status effects!
+This simulation uses [bevy_rapier](https://crates.io/crates/bevy_rapier2d) to generate colliders that regular rigidbodies can interact with. 
+This allows for a player to affect the simulation and, since each particle type can have its separate collider, particle-based status effects!
 
 Currently, the simulation is chunk-based, meaning that only chunks who have updating particles are simulated.
 
