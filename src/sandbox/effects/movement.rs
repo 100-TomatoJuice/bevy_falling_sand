@@ -210,7 +210,7 @@ fn line_with_rotation(
         2 => rotate_45_counterclockwise(w, h),
         3 => rotate_90_clockwise_normalized(w, h),
         4 => rotate_90_counterclockwise_normalized(w, h),
-        _ => panic!("{} is not a rotation type. Use numbers 0-3.", rotate_type),
+        _ => panic!("{} is not a rotation type. Use numbers within range 0..=4.", rotate_type),
     };
     let desired_position = (start_x + velocity.0, start_y + velocity.1);
 

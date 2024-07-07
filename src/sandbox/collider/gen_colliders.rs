@@ -35,13 +35,13 @@ pub fn generate_sandbox_colliders(
 
             let blocks = march_edges(sandbox, low, high, *collision_type);
 
-            let theta = match collision_type {
+            let epsilon = match collision_type {
                 CollisionType::Solid => 1.0,
                 _ => 2.0,
             };
 
             for block in &blocks {
-                let block = ramer_douglas_peucker(block, theta);
+                let block = ramer_douglas_peucker(block, epsilon);
                 let block = block
                     .into_iter()
                     .map(|pos| {
