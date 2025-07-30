@@ -19,7 +19,7 @@ fn try_spread(x: usize, y: usize, sandbox: &mut Sandbox) -> bool {
         .growable
     {
         Some(growable) => {
-            if !thread_rng().gen_bool(growable.spread_chance) {
+            if !rand::rng().random_bool(growable.spread_chance) {
                 return false;
             }
 
@@ -34,7 +34,7 @@ fn try_spread(x: usize, y: usize, sandbox: &mut Sandbox) -> bool {
         (x, y.overflowing_sub(1).0),
         (x, y + 1),
     ];
-    search_directions.shuffle(&mut thread_rng());
+    search_directions.shuffle(&mut rand::rng());
 
     for (neighbor_x, neighbor_y) in search_directions {
         if let Some(particle) = sandbox.checked_get(neighbor_x, neighbor_y) {
@@ -59,7 +59,7 @@ fn try_upwards_growth(x: usize, y: usize, sandbox: &mut Sandbox) {
         .growable
     {
         Some(growable) => {
-            if !thread_rng().gen_bool(growable.spread_chance) || !growable.can_sprout {
+            if !rand::rng().random_bool(growable.spread_chance) || !growable.can_sprout {
                 return;
             }
 
@@ -74,7 +74,7 @@ fn try_upwards_growth(x: usize, y: usize, sandbox: &mut Sandbox) {
         (x, y + 1),
         (x, y.overflowing_sub(1).0),
     ];
-    search_directions.shuffle(&mut thread_rng());
+    search_directions.shuffle(&mut rand::rng());
 
     for (neighbor_x, neighbor_y) in search_directions {
         if sandbox.checked_get(neighbor_x, neighbor_y).is_some()

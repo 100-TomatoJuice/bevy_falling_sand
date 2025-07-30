@@ -20,7 +20,6 @@ fn main() {
                 })
                 .set(ImagePlugin::default_nearest()),
         )
-        .insert_resource(Msaa::Off)
         .add_plugins(RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(100.0))
         //.add_plugins(RapierDebugRenderPlugin::default())
         .add_plugins(SandboxPlugin)
@@ -29,15 +28,16 @@ fn main() {
 }
 
 fn setup(mut commands: Commands) {
-    commands.spawn(Camera2dBundle {
-        projection: OrthographicProjection {
-            scaling_mode: ScalingMode::Fixed {
-                width: 1920.0,
-                height: 1080.0,
-            },
-            near: -1000.0,
-            ..default()
-        },
-        ..default()
-    });
+    commands.spawn((
+       Camera2d::default(),
+       Msaa::Off,
+       Projection::from(OrthographicProjection {
+           scaling_mode: ScalingMode::Fixed {
+               width: 1920.0,
+               height: 1080.0,
+           },
+           near: -1000.0,
+           ..OrthographicProjection::default_2d()
+       }),
+   ));
 }

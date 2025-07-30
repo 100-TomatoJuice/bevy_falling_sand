@@ -1,5 +1,5 @@
 use bevy::prelude::Vec2;
-use rand::{thread_rng, Rng};
+use rand::{rng, Rng};
 
 use crate::sandbox::{particle::*, particle_types::*, sandbox::Sandbox};
 
@@ -151,7 +151,7 @@ fn spark_if_ignited(x: usize, y: usize, sandbox: &mut Sandbox) {
         if sandbox.checked_get(neighbor_x, neighbor_y).is_none()
             && !sandbox.out_of_bounds_usize(neighbor_x, neighbor_y)
         {
-            let new_particle = if thread_rng().gen_ratio(1, 3) {
+            let new_particle = if rng().random_ratio(1, 3) {
                 get_particle(ParticleTypes::Spark)
             } else {
                 get_particle(ParticleTypes::Smoke)

@@ -10,72 +10,73 @@ pub fn generate_sandbox_colliders(
     sandbox: Query<&mut Sandbox>,
     mut storage: ResMut<ColliderStorage>,
 ) {
-    let sandbox = sandbox.single();
-    let width = sandbox.width();
-    let height = sandbox.height();
-
-    let chunks = sandbox.get_all_chunks();
-    for (i, chunk) in chunks.iter().enumerate() {
-        if !chunk.is_strong_ticked() {
-            continue;
-        }
-        despawn_old_colliders(&mut storage, i, &mut commands);
-
-        let low = local_to_world(chunk, Vec2::ZERO);
-        let high = local_to_world(
-            chunk,
-            Vec2::new(chunk.width() as f32, chunk.height() as f32),
-        );
-
-        let mut colliders = vec![];
-        for collision_type in CollisionType::iter() {
-            if *collision_type == CollisionType::None {
+    if let Ok(sandbox) = sandbox.single() {
+        let width = sandbox.width();
+        let height = sandbox.height();
+    
+        let chunks = sandbox.get_all_chunks();
+        for (i, chunk) in chunks.iter().enumerate() {
+            if !chunk.is_strong_ticked() {
                 continue;
             }
-
-            let blocks = march_edges(sandbox, low, high, *collision_type);
-
-            let epsilon = match collision_type {
-                CollisionType::Solid => 1.0,
-                _ => 2.0,
-            };
-
-            for block in &blocks {
-                let block = ramer_douglas_peucker(block, epsilon);
-                let block = block
-                    .into_iter()
-                    .map(|pos| {
-                        ((pos - Vec2::new(width as f32 / 2.0, height as f32 / 2.0))
-                            + Vec2::new(0.5, 0.5))
-                            * Vec2::new(8.0, 8.0)
-                    })
-                    .collect();
-
-                let collider = match collision_type {
-                    CollisionType::None => panic!(),
-                    CollisionType::Solid => commands.spawn(Collider::polyline(block, None)),
-                    CollisionType::Acid => commands.spawn((
-                        Collider::polyline(block, None),
-                        Sensor,
-                        // Acid Status Marker
-                    )),
-                    CollisionType::Fire => commands.spawn((
-                        Collider::polyline(block, None),
-                        Sensor,
-                        // Fire Status Marker
-                    )),
-                    CollisionType::Water => commands.spawn((
-                        Collider::polyline(block, None),
-                        Sensor,
-                        // Water Status Marker
-                    )),
+            despawn_old_colliders(&mut storage, i, &mut commands);
+    
+            let low = local_to_world(chunk, Vec2::ZERO);
+            let high = local_to_world(
+                chunk,
+                Vec2::new(chunk.width() as f32, chunk.height() as f32),
+            );
+    
+            let mut colliders = vec![];
+            for collision_type in CollisionType::iter() {
+                if *collision_type == CollisionType::None {
+                    continue;
                 }
-                .id();
-                colliders.push(collider);
+    
+                let blocks = march_edges(sandbox, low, high, *collision_type);
+    
+                let epsilon = match collision_type {
+                    CollisionType::Solid => 1.0,
+                    _ => 2.0,
+                };
+    
+                for block in &blocks {
+                    let block = ramer_douglas_peucker(block, epsilon);
+                    let block = block
+                        .into_iter()
+                        .map(|pos| {
+                            ((pos - Vec2::new(width as f32 / 2.0, height as f32 / 2.0))
+                                + Vec2::new(0.5, 0.5))
+                                * Vec2::new(8.0, 8.0)
+                        })
+                        .collect();
+    
+                    let collider = match collision_type {
+                        CollisionType::None => panic!(),
+                        CollisionType::Solid => commands.spawn(Collider::polyline(block, None)),
+                        CollisionType::Acid => commands.spawn((
+                            Collider::polyline(block, None),
+                            Sensor,
+                            // Acid Status Marker
+                        )),
+                        CollisionType::Fire => commands.spawn((
+                            Collider::polyline(block, None),
+                            Sensor,
+                            // Fire Status Marker
+                        )),
+                        CollisionType::Water => commands.spawn((
+                            Collider::polyline(block, None),
+                            Sensor,
+                            // Water Status Marker
+                        )),
+                    }
+                    .id();
+                    colliders.push(collider);
+                }
             }
+    
+            storage.colliders[i] = Some(colliders);
         }
-
-        storage.colliders[i] = Some(colliders);
     }
 }
 

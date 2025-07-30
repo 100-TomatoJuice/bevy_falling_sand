@@ -9,7 +9,7 @@ use super::sandbox::*;
 
 pub fn update_particles(mut sandbox_query: Query<&mut Sandbox>) {
     let mut sandbox = sandbox_query
-        .get_single_mut()
+        .single_mut()
         .expect("There should be a Sandbox at this point");
 
     sandbox.reset_ticked_chunks();

@@ -79,7 +79,7 @@ fn get_step_data(x: i32, y: i32, sandbox: &Sandbox) -> StepData {
         MovementType::Solid => return StepData::default(),
     };
 
-    let clockwise_prioity = thread_rng().gen_bool(0.5);
+    let clockwise_prioity = rng().random_bool(0.5);
     let mut movement_rotations = match clockwise_prioity {
         true => vec![0, 1, 2, 3, 4],
         false => vec![0, 2, 1, 4, 2],

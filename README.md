@@ -12,20 +12,20 @@ Currently, the simulation is chunk-based, meaning that only chunks who have upda
 
 ## ⚛ Particle Mappings
 
-Particle | Mapping
---- | ---
-Sand | 1
-Water | 2
-Stone | 3
-Acid | 4
-Wood | 5
-Spark | 6
-Lava | 7
-Oil | 8
-Gunpowder | 9
-TNT | 0
-Dirt | -
-Grass | =
+| Particle  | Mapping |
+|-----------|---------|
+| Sand      | 1       |
+| Water     | 2       |
+| Stone     | 3       |
+| Acid      | 4       |
+| Wood      | 5       |
+| Spark     | 6       |
+| Lava      | 7       |
+| Oil       | 8       |
+| Gunpowder | 9       |
+| TNT       | 0       |
+| Dirt      | -       |
+| Grass     | =       |
 
 
 ## ⚙️ How to Test

@@ -136,7 +136,7 @@ impl Growable {
             spread_chance,
             grow_as,
             up_chance,
-            can_sprout: thread_rng().gen_bool(up_chance),
+            can_sprout: rand::rng().random_bool(up_chance),
         }
     }
 }

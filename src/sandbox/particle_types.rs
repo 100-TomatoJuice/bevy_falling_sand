@@ -71,7 +71,7 @@ pub fn get_particle(particle_type: ParticleTypes) -> Particle {
             ..default()
         },
         ParticleTypes::Steam => {
-            let tick_health = thread_rng().gen_range(100..120);
+            let tick_health = rand::rng().random_range(100..120);
             Particle {
                 health: ParticleHealth::new(tick_health, false),
                 color: (240, 233, 201, 255),
@@ -127,7 +127,7 @@ pub fn get_particle(particle_type: ParticleTypes) -> Particle {
             ..default()
         },
         ParticleTypes::Spark => {
-            let tick_health = thread_rng().gen_range(5..10);
+            let tick_health = rand::rng().random_range(5..10);
             Particle {
                 health: ParticleHealth::new(tick_health, false),
                 color: (204, 146, 94, 255),
@@ -143,7 +143,7 @@ pub fn get_particle(particle_type: ParticleTypes) -> Particle {
             }
         }
         ParticleTypes::Ember => {
-            let tick_health = thread_rng().gen_range(30..45);
+            let tick_health = rand::rng().random_range(30..45);
             Particle {
                 health: ParticleHealth::new(tick_health, true),
                 color: (190, 121, 121, 255),
@@ -158,7 +158,7 @@ pub fn get_particle(particle_type: ParticleTypes) -> Particle {
             }
         }
         ParticleTypes::Smoke => {
-            let tick_health = thread_rng().gen_range(40..55);
+            let tick_health = rand::rng().random_range(40..55);
             Particle {
                 health: ParticleHealth::new(tick_health, false),
                 color: (36, 22, 41, 255),
